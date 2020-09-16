@@ -1,0 +1,29 @@
+#include<iostream>
+#include<string>
+#include<stack>
+using namespace std;
+
+int main() {
+	string s; // 입력받는 괄호 
+	cin >> s;
+	stack<int> a; // 각 배열의 인덱스를 push, pop 하기위한 스택
+	int ans=0; // 쇠막대기의 조각 수 
+
+	for (int i = 0; i < s.size(); i++) {
+		if (s[i] == '(') { 
+			a.push(i); // ( 모양이면 push 
+		}
+		else { // ) 모양이라면
+			if (a.top() + 1 == i) { // 만일 스택의 top이 ) 모양의 인덱스와 1차이가 난다면
+				a.pop(); // 해당 인덱스를 pop 하고 
+				ans += a.size(); //남은 인덱스 의 수만큼 더해준다.
+			}
+			else { // 만일 1이상 차이가 난다면 올바르지 않은 괄호이므로
+				a.pop(); //해당 인덱스를 pop 해주고
+				ans += 1; // 레이저가 n개 일경우 n+1만큼의 조각이 나오므로 1을 더해준다.
+			}
+		}
+	}
+	cout << ans << "\n";
+	return 0;
+}
