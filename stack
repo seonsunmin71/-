@@ -1,0 +1,74 @@
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+struct Stack { //struct 구조 
+	int data[10000]; //입력받는 N수는 10000까지
+	int size; // 스택 사이즈 
+	Stack() { // Stack 함수 
+		size = 0; // 배열 사이즈 초기화 
+	}
+	void push(int num) { // push 경우
+		data[size] = num; // data배열에 새로운 num push 
+		size += 1; // 스택 크기 하나 늘려서 받을 공간 생성.
+	}
+	bool empty() { //empty 경우 
+		if (size == 0) { // 배열 크기가 0일경우 
+			return true; // true ,0
+		}
+		else { // 배열 크기가 0이 아닐경우
+			return false; // false, 1
+		}
+	}
+	int pop() {
+		if (empty()) { // empty 함수가 true 일경우
+			return -1; // -1 출력 
+		}
+		else { // empty 함수가 false 일 경우 pop할게 있으므로
+			size -= 1; // 스택 크기 하나 줄이고
+			return data[size]; //마지막 스택의 원소를 반환 
+		}
+	}
+	int top() {
+		if (empty()) { // empty가 true 일 경우
+			return -1; // -1 출력
+		}
+		else { // empty 가 false 일 경우
+			return data[size - 1]; // 마지막 스택의 원소를 반환
+		}
+	}
+};
+int main() { 
+	int n; //n 입력
+	cin >> n;
+
+	Stack s; 
+
+	while (n--) { // n개의 입력 줄이 다 출력될때까지 
+		string cmd; // 명령문 
+		cin >> cmd;
+
+		if (cmd == "push") { //명령문이 push가 들어왔을경우
+			int num;
+			cin >> num; // push num 으로 입려받으므로 
+			s.push(num); // num push 
+		}
+		else if (cmd == "top") { //명령문이 top 일경우 
+			cout << (s.empty() ? -1 : s.top()) << '\n'; //empty 가 true 일경우 -1, false일 경우 s.top() 출력
+		}
+		else if (cmd == "size") { //명령문이 size 일경우
+			cout << s.size << '\n'; // 배열의 사이즈 출력 
+		}
+		else if (cmd == "empty") { //명령문이 empty 일경우
+			cout << s.empty() << '\n'; // s.empty true or false 출력
+		}
+		else if (cmd == "pop") { // 명령문이 pop 일 경우
+			cout << (s.empty() ? -1 : s.top()) << '\n'; //s.empty 가 true일경우 -1, false일경우 s.top() 출력
+			if (!s.empty()) { //empty 값이 false 일 경우 
+				s.pop(); // pop 함수 실행 
+			}
+		}
+	}
+	return 0;
+}
