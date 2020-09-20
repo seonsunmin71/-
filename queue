@@ -1,0 +1,93 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+
+struct queue {
+	int data[10000]; //큐 구현하기 위한 배열 선언 (숫자가 들어갈거이기 때문에 int형)
+	int begin = 0; //큐 첫번째 인덱스 
+	int end = 0; // 큐 마지막 인덱스 
+
+	void push(int num) { // end 부분에 push 
+		data[end] = num;
+		end += 1;
+
+	}
+	bool empty() { 
+		if (begin == end) {
+			return true;
+		}
+		else
+			return false;
+	}
+	int size() { // size는 end-begin 값 
+		return end - begin;
+	}
+
+	int front() {
+		return data[begin];
+	}
+	int back() {
+		return data[end-1];
+	}
+	int pop() { // 첫번째 인덱스를 pop
+		if (empty()) {
+			return -1;
+		}
+		begin += 1;
+		return data[begin-1];
+	
+	}
+
+};
+
+int main() {
+	int n;
+	cin >> n;
+
+	queue q; 
+
+	while (n--) {
+		string cmd;
+		cin >> cmd;
+
+		if (cmd == "push") {
+			int num;
+			cin >> num;
+			q.push(num);
+		}
+		else if (cmd == "pop") {
+			if (q.empty()) {
+				cout << -1 << "\n";
+			}
+			else {
+				cout << q.front() << "\n";
+				q.pop();
+			}
+		}
+		else if (cmd == "size") {
+			cout << q.size() << "\n";
+
+		}
+		else if (cmd == "empty") {
+			cout << q.empty() << "\n";
+		}
+		else if (cmd == "front") {
+			if (q.empty()) {
+				cout << -1 << "\n";
+			}
+			else {
+				cout << q.front() << "\n";
+			}
+		}
+		else if (cmd == "back") {
+			if (q.empty()) {
+				cout << -1 << "\n";
+			}
+			else {
+				cout << q.back() << "\n";
+			}
+		}
+	}
+	return 0;
+}
