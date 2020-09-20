@@ -1,0 +1,26 @@
+#include<iostream>
+#include<queue>
+#include<string>
+using namespace std;
+
+int main() {
+	int n, m;
+	cin >> n >> m; // 입력받는 사람 수 
+	queue<int> s; // queue 선언 
+
+	for (int i = 1; i <= n; i++) {
+		s.push(i); // 처음 입력받은 수를 전부 큐에 push 
+	}
+
+	cout << "<"; // '<' 안에 pop 숫자 정렬이 들어가야 하므로 
+	for (int i = 0; i < n - 1; i++) { //각 숫자별로 m번씩 돌아야 하므로 
+		for (int j = 0; j < m - 1; j++) {
+			s.push(s.front()); // 첫번째 인덱스를 다시 push 해서 뒤로 넣고 
+			s.pop(); // 첫번째 인덱스는 pop으로 			
+			}
+		cout << s.front()<<", "; // m-1번째 push-pop한 다음 첫번째 pop 할 인덱스 출력
+		s.pop(); // 출력 후 pop ; 완전히 제외 시킬 것이므로 push는 하지 않음.
+		}
+	cout << s.front() << ">" << "\n"; // 마지막 남는 숫자는 어차피 남으므로 그냥 출력
+	return 0;
+}
